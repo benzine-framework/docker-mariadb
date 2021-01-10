@@ -1,4 +1,4 @@
-FROM mariadb:latest
+FROM mariadb:10
 # Copy healthcheck file.
 COPY health.sh /usr/bin/healthcheck
 # Add healthcheck
