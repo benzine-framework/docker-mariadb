@@ -1,7 +1,6 @@
-# From upstream mariadb:10.3.1
-FROM mariadb:10.3.1
+FROM mariadb:latest
 # Copy healthcheck file.
 COPY health.sh /usr/bin/healthcheck
 # Add healthcheck
 HEALTHCHECK --interval=30s --timeout=3s \
-  CMD /usr/bin/healthcheck 
+  CMD /usr/bin/healthcheck
