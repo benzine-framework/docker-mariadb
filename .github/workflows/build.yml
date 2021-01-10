@@ -20,10 +20,18 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_PASSWORD }}
+      - uses: docker/login-action@v1
+        name: Login to Github Container Registry
+        with:
+          registry: ghcr.io
+          username: ${{ secrets.GHCR_USERNAME }}
+          password: ${{ secrets.GHCR_PASSWORD }}
       - uses: docker/build-push-action@v2
         name: Build & Push
         with:
           context: .
-          platforms: linux/amd64,linux/arm64,linux/arm/v6,linux/arm/v7
+          platforms: linux/amd64,linux/arm64
           push: true
-          tags: benzine/mariadb
+          tags: |
+            benzine/mariadb
+            ghcr.io/benzine-framework/docker-mariadb
