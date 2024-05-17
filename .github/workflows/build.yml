@@ -60,7 +60,6 @@ jobs:
       - uses: docker/build-push-action@v5
         name: Build & Push
         with:
-          context: mariadb
           platforms: ${{ env.ACT && 'linux/amd64' || 'linux/amd64,linux/arm64' }}
           pull: true
           push: true
