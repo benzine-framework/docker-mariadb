@@ -1,9 +1,21 @@
 name: Build
 
+permissions:
+  contents: read
+  packages: write
+
 on:
+  workflow_call:
+  workflow_dispatch:
   push:
+    branches:
+      - main
   schedule:
-    - cron: '0 4 * * TUE'
+    - cron: "0 14 * * 2" # 2pm Patch Tuesday
+
+concurrency:
+  group: ${{ github.head_ref || github.run_id }}
+  cancel-in-progress: true
 
 jobs:
   build:
@@ -18,14 +30,14 @@ jobs:
       - uses: docker/login-action@v1
         name: Login to Docker Hub
         with:
-          username: ${{ secrets.DOCKER_HUB_USERNAME }}
-          password: ${{ secrets.DOCKER_HUB_PASSWORD }}
+          username: matthewbaggett
+          password: ${{ secrets.DOCKER_HUB_TOKEN }}
       - uses: docker/login-action@v1
         name: Login to Github Container Registry
         with:
           registry: ghcr.io
-          username: ${{ secrets.GHCR_USERNAME }}
-          password: ${{ secrets.GHCR_PASSWORD }}
+          username: matthewbaggett
+          password: ${{ secrets.GITHUB_TOKEN }}
       - uses: docker/build-push-action@v2
         name: Build & Push
         with:
