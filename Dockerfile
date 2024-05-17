@@ -2,8 +2,8 @@
 FROM mariadb:injected-version
 
 LABEL maintainer="Matthew Baggett <matthew@baggett.me>" \
-      org.label-schema.vcs-url="https://github.com/benzine-framework/docker" \
-      org.opencontainers.image.source="https://github.com/benzine-framework/docker"
+      org.label-schema.vcs-url="https://github.com/benzine-framework/docker-mariadb" \
+      org.opencontainers.image.source="https://github.com/benzine-framework/docker-mariadb"
 
 # If healthcheck.sh isn't baked into the underlying image, crash.
 RUN which healthcheck.sh
